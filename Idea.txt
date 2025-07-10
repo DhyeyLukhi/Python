@@ -1,0 +1,33 @@
+11i -->
+    {Task Completed} --> It will recognise the correct name of file and folder and print the path
+                     --> Sending mails using the email-id and app password of the user's email-id
+                     --> It will read news for you
+    {Task Completed} --> All variables' name will be easy to read and easy to identify
+                     --> There might be comments to identify the work of the function
+                     --> It will may store your data in the file and wishes you on birthday, on progress
+                     --> Learn more about Shutil module and use it in the Program
+                     --> shutil.rmtree removes the directoru without warning, i will set up the warning for it
+                     --> Learn more about datetime module and try to use it in Pr ogram
+                     --> Learn more about webbrowser module and try to use it in Program
+    {Task Completed} --> Search Article in Wikiepdia feature
+                         --> For Wikipedia you have to put the '_' instead of space in the domain to search the exact topic
+    {Task Completed} -->  The code of rename feature is little bit complicated, so I will change it to easy
+                     --> I will check the every code of the every feature and repair it for better performance and readability
+                     --> Moving files and folder may take time, so i will counter it by using sys module and says "transfering..." or "doing..."
+    {Task Completed} --> It will check every website if it exist then open otherwise close and say that it doesn't exist or safe
+                     --> It will open the specified apps or do specified tasks when user pressed any specific key
+                     --> Add a reminder feature in python if possible
+    {Task Completed} --> I will try to convert it as a simple notepad
+    {Task Completed} --> I will make the function for every little program in the Assistant
+                     --> I will make the code to take command and speak at one time
+                     --> I will make it able to do trigonometric functions' calculaions
+                     --> I will try to increse and decrease the volume and brightness using the assistant
+                     --> I will also try to turn on and off some functions using the assistant
+                     --> By searching and printing the article from Wikipedia, it sometimes put \n in the name of the city, so i will find the proper solution for that
+
+
+12i -->
+                     --> Task will start from here
+                     --> I will add the ERROR message in every except command to know the user about the ERROR
+    {Task Completed} --> It will ask you before deleting the folder if the folder is not Empty
+                     --> I will use the urllib module/library to parse the URLs

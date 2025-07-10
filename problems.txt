@@ -1,0 +1,10 @@
+[solved] -- ERROR while creating multiple folders
+                --> It creates only one folder
+
+        solution -- I had put the return value in the for loop, so i had just remove that return statement and it starts working
+
+
+
+-- ERROR it can get the name of file as the path but i don't want it
+
+

@@ -1,0 +1,1328 @@
+************************************************************************************************************************
+******************************************* YOU ARE A HUMAN, NOT A MACHINE *********************************************
+************************************************************************************************************************
+
+
+
+1. os.walk()    ---> It is used to iterate all the files and directories in the Specific folder
+                ---> It generates file names in a directory tree by walking either top-down or bottom-up through the directory tree.
+                ---> Input: Path
+                ---> Output: Name of directories and file
+
+
+2. os.path.join(path_1, path_2)   ---> It is used to join path of two directories
+                                  ---> Input: path of first directory, path of second directory
+                                  ---> Output: Combined the path of given directories
+
+
+3. os.getcwd()    ---> It shows the current working directory
+                  ---> Input: Nothing
+                  ---> Output: Path of your current working directory
+
+
+4. subprocess.Popen()    ---> It is used for spawning a new process, running a command in the subprocess, and interacting with it from the calling Python program
+                         ---> Input: A list or a string representing the command to be executed and its arguments
+                         ---> Output: The subprocess.Popen function returns a Popen object, which represents the spawned process.
+                         ---> This object provides access to information and methods related to the subprocess.
+
+
+5. os.listdir(path)    ---> It shows the items of the provided path
+                       ---> Input: Path to directory
+                       ---> Output: Items available in the directory
+
+
+6. def function_name (self)    ---> Here self means that object/variable for which this method/function is called
+                               ---> It is very useful in object oriented programming, when you have to call the constructor
+
+
+7. Iterator:
+--> An iterator is an object representing a stream of data.
+--> It implements two methods: __iter__() and __next__().
+--> The __iter__() method returns the iterator object itself.
+--> The __next__() method returns the next value from the iterator.
+--> When there are no more items to return, it should raise the StopIteration exception.
+--> To create a Iterator use : variablename = iter(iterable_item)
+
+
+8. Iterable:
+--> An iterable is any Python object capable of returning its elements one at a time.
+--> Examples of iterables include lists, tuples, strings, dictionaries, and sets.
+
+
+9. Iteration:
+--> Process of Iterate is called the Iteration
+--> To Iterate the Iterable you can use Iterator : iterator.__next__()
+--> "iterator.__next__()" -> this will iterate only one item so if you have 10 items in the list, touple, dictionaries or in sets you have to use it 10 times to complete the iteration
+--> If we go out of the range of the Iterable then it shows an StopIteration ERROR
+
+
+10. Generators:
+--> A generator is a special type of iterator.
+--> It is created using a function with the "yield" keyword.
+--> "yield" keyword can only use in the function, you cannot use it outside of the function
+--> Generators allow you to iterate over a potentially large sequence of data without generating the entire sequence in memory at once.
+--> They are more memory-efficient compared to lists or tuples.
+
+*******************************************************************************************
+| """"""""" All generators are iterators, but not all iterators are generators. """"""""" |
+*******************************************************************************************
+
+
+
+11. To do multitasking or multiprocessing:
+                --> variabl = multiprocessing.Process(target=function), variabl.start(), variabl.join()
+        --> This function helps you to call multiple function at one time
+        --> WARNING: This function takes no argument and there will no parentheses while calling the function
+
+
+    11.1. To do multttasking or multiprocessing, passing values to the function
+                    --> variable = multiprocessing.Process(target=function, args=[firstargument, secondargument])
+            --> This function helps you to call multiple function at one time with taking an arguments
+            --> WARNING: In this function you have to specify the arguments with "args=",
+            --> And the argument given to the function must be iterable
+
+
+12. About Dictionary, Set, List and Tuple:
+    --> Arrya = [23, 32, 34, 32]  --> All elements have the have the same data-type, fixed size
+    --> Lists: [95, "Dhyey", 'd', 95.10]  --> Elements' data-type doesn't matter, re-sizable
+    Array:
+        --> Collection of same type of elements
+        --> Re-sizable
+        --> Indexed
+
+    Dynamic Array:
+        --> Collection of same type of elements(if it is not list)
+        --> Re-sizable
+        --> Indexed
+
+
+    --> Dictonary: {"Key" : "Value", "Dhyey" : "iPrime", "OS" : 95}  --> Pair of Key and it's Value
+        --> Here is the way to print the dictonary
+            --> code:
+                        for key, value in tasks.items():
+                            print(f"{key} -> {value}")
+
+    --> Set: {95.10, "Dhyey", 95, 'i'}  --> Just like a Lists, all elements must be different from each other, otherwise they(duplicate elements) will be ignored
+    --> Tuple: (95.10, "Dhyey", 95, 'i')  --> Values of tuple cannot changed after creation of it
+
+
+
+13. *args and **kwargs:    --> *args and **kwargs are useful terms in method and classes.
+                           --> *args collects additional positional arguments into a tuple.
+                           --> When we put the *args at functionname(*args)...
+                                ---> Then method takes the value if it was given to method
+                                ---> And it does not takes value if it wasn't given to method
+
+                           --> **kwargs collects additional keyword arguments into a dictionary.
+                           --> When we put the **kwargs at functionsname(**kwargs)...
+                                ---> It takes the value from the user
+
+                           ---> Ex. def my_function(*args, **kwargs):
+                                        print("Positional arguments (*args):")
+                                        for arg in args:
+                                            print(arg)
+
+                                        print("\nKeyword arguments (**kwargs):")
+                                            for key, value in kwargs.items():
+                                               print(f"{key}: {value}")
+
+                                       # Using both *args and **kwargs in a function call
+                                       my_function(1, 2, 3, name='Alice', age=30)
+
+
+
+14. pyttsx3 module and their voices:
+    --> If you have to check that how many vocies do you have, here is the code:
+                                    --> import pyttsx3
+                                        engine = pyttsx3.init()
+                                        voices = engine.getProperty('voices')
+                                        print(voices)
+                                        for voice in voices:
+                                            print(f"ID: {voice.id}, Name: {voice.name}, Language: {voice.languages}")
+            --> This will show you that how many voices can pyttsx3 module use in your PC
+
+    --> And if you want to change the voice then here is the code:
+                                    --> import pyttsx3
+                                        engine = pyttsx3.init()
+                                        voices = engine.getProperty('voices')
+                                        engine.setProperty('voice', voices[0].id)    ** if this doesn't work, try below line **
+                                        engine.setProperty('voice', voices[1].id)    ** Rare chances: if this also doesn't work, try below line **
+                                        engine.setProperty('voice', voices[2].id)
+            --> Here one thing is notable that there is two in-built voices already installed in software.
+            --> You can also install other voices if you have to use them otherwise you have only this two options left.
+
+
+15. Pandas Data Structure:
+    --> Pandas has two types of data strucutres:
+            --> 1. Series : It's one dimesnional array with the indexes, it stores a single collumn or row of data in a DataFrame.
+            --> 2. DataFrame: It's tabular spreadsheet like strucutre representating rows each of which contains one or multiple columns.
+        --> A one-dimensional array(labeled) capable of holding any type of data-Series
+        --> A two-dimensional data(labeled) structure with columns of potentioanlly different types of data - DataFrame
+
+
+16. pandas.where:
+    --> This function tells you that where the condition is true and where is false or NaN
+                --> s = pd.Series(range(10))
+                --> print(s)
+                --> print(s.where(s < 2)
+        --> And this will show you that in the seires 's' where are the values are less than 2
+        --> You can use the inplace function to save that Series, but to do that you have to remove the print fuction in PyCharm
+        --> You cannot use the "axis" function here becaus, For Series "aixs" parameter is unused and defaults to 0
+
+
+17. getting date and time:
+    --> In the Python you have to use datetime module get the date and time
+                --> datetime.datetime.now().strftime())
+        --> In the above line you have to type what you want in parentheses of strftime, ("%H" for hour, "%M" for minutes)
+        --> You can also try other alphabets to get more information
+                --> datetime.date.today()
+        --> Using the above line you can get the date of today
+                --> day = date.strftime("%A")
+        --> And above line will help you get the day of the week
+
+
+18. Adding indexes in the DataFrame:
+    --> Adding indexes in DataFrame is not very much complex
+    --> First, you have to make a another DataFrame of that values you have to add in your main DataFrame, with the same name of column of the Original DataFrame
+    --> Then you can use the pandas.concat function on your original DataFrame to add the value
+
+                --> nexxt = pd.DataFrame([[addname, addmark, addcity]], columns=["Name", "Marks", "City"])
+        --> So in the above line I had made a DataFrame with the name "nexxt" and add the values in it
+
+                --> dataframe = pd.concat([dataframe, nexxt], ignore_index=True)
+        --> Then in the above line, pandas.concat(here pandas = pd) function will add the value from that DataFrame to you DataFrame
+
+        --> In the concat function, in the square bracket the first name is your origina/main DataFrame is second name is your duplicate/substitute DataFrame
+        --> Here ignore_index=True, will continue the Index of the Original DataFrame
+            --> (Ex. if dataframe has 3 index and if you use ignore_index=True it will add values and index will continue from 2, 3, 4, 5...)
+        --> If you put ignore_index=False, then it will add the values but start their index with 0
+            --> (Ex. if dataframe has 3 index and if you use ignore_index=False it add the values but it will not continue the index just like 2, 3, 0, 1, 2..)
+
+    --> If you make duplicate/substitute DataFrame with different name of column, and use the concate function then it will add that columns in the Original DataFrame
+    --> So, when you want to only add the values of indexes in the Original DataFrame, put name of columns in both(Original and duplicate/substitute) are same
+    --> And when you want to add indexes with the columns, put name of column in both(Original and duplicate/substitute) are different.
+
+
+19. More about datetime module and their functions:
+    --> There is are some crazy things in datetime.datetime.now().strftime() function
+    --> The output comes in a string datatype, no matter it is a number or string
+        --> datetime.datetime
+                --> datetime.datetime.now().strftime('%A') : Monday                     {Day}
+                --> datetime.datetime.now().strftime('%a') : Mon                        {Day in short}
+                --> datetime.datetime.now().strftime('%B') : January                    {Month}
+                --> datetime.datetime.now().strftime('%b') : Jan                        {Month in short}
+                --> datetime.datetime.now().strftime('%C') : 20                         {20 is representating the 21st century}
+                --> datetime.datetime.now().strftime('%c') : Mon Jan 1 11:24:58 2024    {Everything}
+                --> datetime.datetime.now().strftime('%D') : 01/01/2024                 {Date - MM/DD/YY}
+                --> datetime.datetime.now().strftime('%d') : 01                         {Date of month}
+                --> datetime.datetime.now().strftime('%e') : 1                          {Date of month in short}
+                --> datetime.datetime.now().strftime('%F') : 2024-01-01                 {Date in yyyy-mm-dd formate}
+                --> datetime.datetime.now().strftime('%f') : 066252                     {Microseconds}
+                --> datetime.datetime.now().strftime('%G') : 2024                       {Year}
+                --> datetime.datetime.now().strftime('%g') : 24                         {Year in short}
+                --> datetime.datetime.now().strftime('%H') : 11                         {Hour of day in 24 hour clock formate}
+                --> datetime.datetime.now().strftime('%h') : Jan                        {Month in short}
+                --> datetime.datetime.now().strftime('%I') : 11                         {Hour of day in 12 hour clock formate
+                --> datetime.datetime.now().strftime('%j') : 001                        {Day of year}
+                --> datetime.datetime.now().strftime('%M') : 24                         {Minutes}
+                --> datetime.datetime.now().strftime('%m') : 01                         {Month}
+                --> datetime.datetime.now().strftime('%p') : AM                         {Merdian}
+                --> datetime.datetime.now().strftime('%R') : 11:24                      {Time with 24 hour clock formate}
+                --> datetime.datetime.now().strftime('%r') : 11:24:58 AM                {Time with more}
+                --> datetime.datetime.now().strftime('%S') : 58                         {Second}
+                --> datetime.datetime.now().strftime('%T') : 11:24:58                   {Time with 24 hour clock formate}
+                --> datetime.datetime.now().strftime('%U') : 00                         {Weeok of year, here 00 = 1st week}
+                --> datetime.datetime.now().strftime('%u') : 1                          {Number of day in week}
+                --> datetime.datetime.now().strftime('%V') : 01                         {ISO 8601 week number of the year(01-53), Monday as starting day}
+                --> datetime.datetime.now().strftime('%W') : 01                         {US covention week number of the year (zero-padded decimal number(00-53), Sunday as starting day}
+                --> datetime.datetime.now().strftime('%w') : 1                          {Day number of week (sunday = 0)
+                --> datetime.datetime.now().strftime('%X') : 11:24:58                   {Time of day}
+                --> datetime.datetime.now().strftime('%x') : 01/01/24                   {Date - MM/DD/YY}
+                --> datetime.datetime.now().strftime('%Y') : 2024                       {Year}
+                --> datetime.datetime.now().strftime('%y') : 24                         {Year in short}
+                --> datetime.datetime.now().strftime('%Z') :                            {Timezone Name}
+                --> datetime.datetime.now().strftime('%z') :                            {How much behind your time compared to UTC time)
+
+        --> datetime.timedelta:
+            --> timedelta representes the duration, a difference between two datetime or date instances
+                -->
+                    delta = datetime.timedelta(
+                        days=50,
+                        seconds=27,
+                        microseconds=10,
+                        milliseconds=29000,
+                        minutes=5,
+                        hours=8,
+                        weeks=2
+                    )
+                    --> Here in this example, milliseconds got convert into microseconds, miutes and hours got convert inot seconds and weeks got convert into days
+                    --> So whatever you entered in the function, only days, seconds and milliseconds remains calculated
+
+                -->
+                    delta = datetime.timedelta(hours = 10)
+                        --> This will calculate the 10 hours in the days, hours, minutes, and seconds and you got the time which equals to 10 hours
+                        --> If you replace the 10 by big value like 70 will get the answer: 2 days, 22:00:00 (2 days = 48 hours, 22 hours + 48 hours = 72 hours)
+                        --> This is similarly apply to float values and other time durations
+
+20. os.path.isfile      --> This function helps you to check that given path is points to file or not
+                        --> Input : Path
+                        --> Output: If the given path is points file it returns 'True' otherwise it returns 'False'
+
+
+21. os.path.isdir       --> This function helps you to check that given path is points to directory or not
+                        --> Input : Path
+                        --> Output: If the given path is points direcotry it returns 'True' otherwise it returns 'False'
+
+
+22. del (listname[index])       --> This function helps you to delete one item in the lists
+                                --> And it also shifts other items to one step forward (while deleting the item) so we don't need to code very much for that
+
+
+23. Printing first two decimals of floating point (In C language it is %0.2f) :
+    --> Sometimes, it happens when floating point number prints too many decimal numbers and you want only first two or three numbers.
+    --> And that time you can't change datatype from float to int
+                                --> my_float = 3.14159
+                                --> print(f"{my_float:.2f}")
+
+
+23. time.sleep(time)        --> This function stops the program for "time" seconds
+                            --> This function comes form the time module
+
+
+24. if __name__ == '__main__':
+    --> It is not necessary to put 'main' in Python, it depends on your useage and code complexity to put 'main' or not.
+    --> when you use this in one.py and import the one.py file into two.py file
+    --> It only import the statements and definitions of one.py into two.py file
+    --> Also Note that the statements used outside main and definitions called outside main of one.py will be directly executed in the execution of two.py
+        --> In the Complex Projects, it increases the Useability, Testability, Clarity and Avoiding Unintended Excution
+        --> In the Simeple projects, Simple execution and for Readability it is not very userful
+
+
+25. eval():
+    --> "eval" command is used to evalate the given term
+    --> "eval" function takes the argument as string instead of integer or float
+    --> function needs only the mathematical term to evaluate
+    --> "eval" can only wide range of calculations
+    --> Some time "eval" function is less efficient than usual, especially in repetitive calculations
+
+
+26. print(eval(input())):
+    --> This is the one line calculator in the Pthon
+    --> It first takes the input from the user and then calculate and print the answer to the console
+    --> You cam modify it by using the math module and taking input as math.sin(radian), math.cos(radian), and you will get the answer of trigonometric function
+
+
+27. Create a file using 'with open':
+    --> Creating a file using 'with open'
+    --> code :
+                --> with open (file_name, "mode") as file:
+                -->     operations
+        --> 'with open' function takes three arguements
+            --> First as name of the file
+            --> Second as the mode/operation
+            --> Third as encoding
+                --> Mode/Operations:
+                    --> r: Read mode. This is the default mode. It opens the file for reading.
+                    --> w: Write mode. It opens the file for writing. If the file already exists, it will be truncated. If the file does not exist, a new file will be created.
+                    --> x: Exclusive creation mode. It opens the file for writing, but only if the file does not already exist. If the file exists, an error will be raised.
+                    --> a: Append mode. It opens the file for writing, but appends the new data to the end of the file instead of overwriting the existing data.
+                    --> b: Binary mode. It opens the file in binary mode.
+                    --> t: Text mode. This is the default mode. It opens the file in text mode.
+    --> Big advantage of using the 'with open' function is that it creates a file if it doesn't exist.
+    --> It also closes the file automatically.
+
+
+28. request.get(url), status_code
+    --> requests.get will get the status code of the provided website to the variable
+    --> code :
+                --> response = requests.get(url)
+                --> print(response.status_code)
+    --> It has five categories
+        --> Informational responses (100 - 199)
+        --> Successful responses (200 - 299)
+        --> Redirection messages (300 - 399)
+        --> Client error responses (400 - 499),
+        --> Server error responses (500 - 599)
+    --> The first digit of the status code specifies the class of response
+
+
+29. Git commands:
+    --> Git is a version control and tracking software created by Linux
+    --> 1. git add.   -- to send the file to the staging area
+    --> 2. git commit -m "comments"    -- to send the file to the git repisory
+    --> 3. git status  -- to get the status of the avialable files
+    --> 4. git --version   -- to get the information about the version of git
+    --> 5. git config --global user.email "your@email.com"     -- to set the email in git
+    --> 6. git config --global user.name "your name"   -- to set your name in git
+    --> git status and git --version are two most important commands, we should run it everytime whenever we open the git bashin the folder
+
+
+30. CTRL Keys:  CTRL = Workable:        B, D, E, G, K, L, N, O, P, Q, R, S, T, U, W, X, Y, X, Z
+                       Non-Workable:    A(select all), C(ERROR pasting), F(Find), H(Backspace), I(Tab), J(Not find), M(Mark), V(As a SpaceBar)
+                ALTR = Workable:        Everyone Except 'D'
+                       Non-Workable:    D(Not find)
+
+
+31. Search anything in computer:
+    --> code:
+                for root, dirs, files in os.walk(path):
+                    if item in dirs or item in files:
+                        print(f"Your '{item}' is Founded at : {os.path.join(root, item)}\n")
+    --> This code can find any item provided to it in your pc at the provided path
+
+
+32. Make a folder:
+    --> Create a folder using the os module
+    --> code:
+                os.mkdir(drive:\\Path\\To\\NewFolder)
+
+    --> You just have to add the name of your new folder in the path and put it into the os.mkdir function
+    --> os.mkdir will make that folder with that name
+
+
+33. Delete folder:
+    --> Use shutil module or os module to delete the folder
+    --> os module and shutil module both have different ways to delete the folder.
+    --> code: OS module
+                os.rmdir(path_to_folder)
+
+            --> Here we have to note that the os.rmdir can only delete the empty folders
+            --> If a folder contains any items inside itself then, os.rmdir cannot delete it
+
+
+    --> code: Shutil module
+                shutil.rmtree(path_to_folder)
+
+                --> shutil.rmtree can remove the folder with it's content
+                --> Here we have to note that shutil.rmtree will remove the folder and it's content without any hesitation.
+                --> It will not ask or warn us before deleting the folder,
+
+
+34. Delete the file:
+    --> Use os module to delete the file.
+    --> code:
+                os.remove(path_to_file)
+
+
+35. Get items in the folder:
+    --> code:
+                items_of_folder = []
+                for item_in_folder in os.listdir(path_to_folder):
+                    item_path = os.path.join(path_to_folder, item_in_folder)
+                    items_of_folder.append(item_in_folder)
+
+    --> This code will provide you every item at path_to_folder
+    --> This will provide you items in the folder, including the hidden items
+
+
+36. Rename any item:
+    --> Use os module to rename the item.
+    --> code:
+                os.rename(path_with_oldname, path_with_newname)
+
+    --> This will rename your path_with_oldname item to path_with_newname item
+    --> Here you have to put path of their item otherwise this will not work
+
+
+37. Move any item:
+    --> Use shutil module to move any item.
+    --> code:
+                shutil.move(old_path, new_path)
+
+    --> This will move your item from old_path to new_path
+    --> It might take some seconds because of some factors.
+        --> Python is not as fast as C/C++ so this may take some seconds
+        --> If the file you selected to move has large size then it will take item, and no doubt if you do that without us then your computer may take some seconds.
+
+
+38. Copy the file:
+    --> Copy the file actually includes one more item.
+    --> We can use the Shutil module to copy the file.
+    --> But,
+        --> Shutil modules believes that if you copy any item in your PC then you will might paste it anywhere in you PC
+        --> So, if you provide path_to_file and path_to_destination,
+        --> Then shutil.copy will copy the file and paste it at your destination
+        --> But if you provide only one path then it is not possible
+
+
+39. Copy the folder:
+    --> Copy the folder have the same thing in Copy the file has
+    --> The change is only in function
+    --> shutil.copytree(path_to_folder, path_to_destination)
+    --> This do the same thing with folder, which shutil.copy does with the file
+
+
+40. Opening Website:
+    --> Use webbrowser module to open the website
+    --> code:
+                webbroweser.open(website)
+
+    --> You have to provide the compelete name of website, including https://
+    --> Otherwise, it might cannot open that
+
+
+41. Extract the text from the input:
+    --> Extracting the text from the input is quite difficult and hard to understand
+    --> Use re module to extract the text from the string/input
+    --> code:
+                match = re.search(f"string1 (.*?) string2", string)
+                if match:
+                    webname = match.group(1)
+
+        --> In the provided code,
+        --> re.search will extract the text between 'string1' and 'string2'
+        --> It stores that text as a string the 'match' variable
+        --> 'if match:' -- code in this if statement will execute if match variable contain anything
+        --> If match variable isn't contain anything then 'if match' returns False and go to 'elif' or 'else'
+        --> match.group(1) method is used to retrieve the contents of the first capturing group in a regular expression match.
+
+
+42. variableName = cv2.VideoCapture(0)
+    --> cv2.VideoCapture fucnction helps you to capture the video from the webcam
+    --> If you have one webcam then you should set it to 0
+    --> If you have more than one webcam then you can set it as our wish.
+    --> This function captures the image into the variableName
+    --> You can see the image by variableName.read() which will give you two values and you have to store it into
+
+
+43. opencv module's finger's number
+    --> id = 0 : Bottom Middle of Palm
+    --> id = 1 : Bottom Middle of Palm to Thumb Side
+    --> id = 2 : Bottom of Thumb
+    --> id = 3 : Middle of Thumb
+    --> id = 4 : Top of Thumb
+    --> id = 5 : Bottom of Pointer
+    --> id = 6 : Upper-side from Bottom of Pointer
+    --> id = 7 : Middle of Pointer
+    --> id = 8 : Top of Pointer
+    --> id = 9 : Bottom of Middle
+    --> id = 10 : Uppers-side from Bottom of Middle
+    --> id = 11 : Middle of Middle Finger
+    --> id = 12 : Top of Middle
+    --> id = 13 : Bottom of Ringman
+    --> id = 14 : Uppers-side from Bottom of Ringman
+    --> id = 15 : Middle of Ringman
+    --> id = 16 : Top of Ringman
+    --> id = 17 : Bottom of Pinky Finger
+    --> id = 18 : Uppers-side from Bottom of Pinky Finger
+    --> id = 19 : Middle of Pinky Finger
+    --> id = 20 : Top of Pinky Finger
+
+
+44. Making circle on the Finger using OpenCV:
+    --> code:
+                cv2.circle(img=image, center=(x, y), radius=5, color=(0, 255, 255), thickness=3)
+
+    --> cv2.circle will make the circle in the image wherever you want to circle
+    --> img=image, where image is the image you want to process
+    --> radius=5, is the radius of the circle of color
+    --> color=(0, 255, 255), is the color formate which is in RGB color fomrate
+    --> thickness=3, is the thickness of the circle
+
+
+45. operations of string:
+    --> string.capitalise()
+        --> This method will capitalize the first character of the string.
+
+    --> string.title()
+        --> This method will capitalize the first character of the word in the string.
+
+    --> string.lower()
+        --> This method will make the string into the lower
+
+    --> string.center(10,'*')
+        --> Makes the string center with '*'
+        --> Here 10 is the width for the string
+        --> Here '*' is the character which will put at before start and after end of the string
+        --> Example:
+            --> string: Python
+            --> method: string.center(10, '*')
+            --> output: **Python**
+
+    --> string.count('L')
+        --> This method will count the character 'L'
+
+    --> string.index('O')
+        --> This method tells the index of the character 'o' (Index starts from 0)
+
+    --> string.replace('/', '-')
+        --> This method replace all the '/' with the '-' of the string
+
+    --> string.split('/')
+        --> This method seperate the string where '/' comes
+        --> This returns the list where string was seperated where '/' character comes
+        --> Returned list does not include the '/' character
+
+    --> string.isalnum()
+        --> This method tell that the string the Alphanumeric or not
+        --> It returns 'True' or 'False' as output
+
+    --> string.isnumeric()
+        --> This method tell that the strin is the numeric or not
+        --> This returns 'True' or 'False' as output
+
+    --> string.islower()
+        --> This method tell that the string is in lower case or not
+        --> This returns 'True' or 'False' as output
+
+    --> string.isupper()
+        --> This tell that the string is in uppper case or not
+        --> This returns 'True' or 'False' as output
+
+
+46. URL:
+    --> Example URL: https://www.anexampleurl.com/aboutus?page=5#fragement
+
+        --> Scheme: This part specifies the protocol used to access the resource
+            --> http:// - Hypertext Transfer Protocol (HTTP)
+            --> https:// - HTTP Secure (HTTPS)
+            --> ftp:// - File Transfer Protocol (FTP)
+            --> mailto: - Email addresses
+            --> tel: - Telephone numbers
+            --> file:// - Local files
+
+        --> Authority: This part usually includes the domain name (or IP address) and optionally the port number of the server hosting the resource.
+            --> It typically appears after the double slashes (//)
+                --> www.anexample.com
+                --> user:password@example.com:8080
+
+        --> Top Level Domain (TLD): Top-level domain (TLD) refers to the last segment of a domain name or the part that follows immediately after the "dot" symbol.
+            --> TLDs are an essential part of the Domain Name System (DNS) and serve as a way to categorize and organize websites on the internet
+
+                --> 1.  Generic Top-Level Domains (gTLDs): These are general-purpose domains that are not tied to any specific country or region.
+                    --> Examples: .com,
+                                  .org,
+                                  .net,
+                                  .info,
+                                  .biz.
+
+                --> 2.  Country Code Top-Level Domains (ccTLDs): These are specific to individual countries or territories and are two-letter codes based on the ISO 3166-1 alpha-2 country codes.
+                    --> Examples: .us for the United States,
+                                  .uk for the United Kingdom,
+                                  .de for Germany,
+                                  .jp for Japan,
+                                  .in for India
+
+                --> 3.  Sponsored Top-Level Domains (sTLDs): These are specialized TLDs that are sponsored by specific organizations or communities and are intended for use by a particular group of users.
+                    --> Examples: .gov for government websites in the United States,
+                                  .edu for educational institutions,
+                                  .aero for the aviation industry
+
+                --> 4.  Infrastructure Top-Level Domain (ARPA): Initially intended for addressing infrastructure issues, ARPA is now used for reverse domain name resolution
+
+
+        --> Path: This part specifies the location of the resource on the server's file system.
+            --> It comes after the authority part and is separated by slashes (/)
+                --> /aboutus/supportandcredits
+                --> /folder1/file.html
+                --> /images/picture.jpg
+                --> /blog/article
+
+        --> Query String: This part, if present, provides additional parameters to be passed to the server.
+            --> It starts with a question mark (?) and consists of key-value pairs separated by ampersands (&)
+                --> ?page=5
+                --> ?page=2&sort=asc
+                --> ?q=search+query
+
+        --> Fragment: This part identifies a specific section within the resource.
+            --> It starts with a hash (#) symbol
+                --> #section1
+                --> #references
+
+        --> Structure of a URL:
+            --> Example: https://www.example.com:so/file.html?key1-avlue1&key2-values#00s0350q
+                --> Protocol: 'https://'
+                --> Sub Domain: 'www'
+                --> Domain Name: 'example.com'
+                --> Port: ':so'
+                --> Path: '/file.html'
+                --> Query: '?'
+                --> Parameters: 'key1-value1&key2-values'
+                --> Fragment: '#00s0350q'
+
+    --> Not all parts of the URL are always present
+    --> The exact structure of the URL depends on the protocol and the specific requirements of the resource being accessed
+
+
+47. Play video of your topic in YouTube:
+    --> You can play video of your topic in YouTube
+    --> But you can't select it you have to just give the name and program will find the video
+    --> code:
+                pywhatkit.playonyt(topic=topic_name)
+        --> here topic_name is the name of the topic
+        --> topic_name must be in string
+
+
+48. Status Code:
+    --> Information (100 - 119):
+        --> 100 - continue
+        --> 101 - Swtichin Protocols
+        --> 102 - Processing
+        --> 103 - Early Hints
+
+    --> Success (200 - 299):
+        --> 200 - OK
+        --> 202 - Cracked
+        --> 202 - Accepted
+        --> 204 - No content
+        --> 206 - Partial Content
+
+    -->  Redirect (300 - 399):
+        --> 300 - Multiple choice
+        --> 301 - Moved Permanently
+        --> 304 - Not modified
+        --> 307 - Temporary Redirect
+        --> 308 - Permanent Redirect
+
+    --> Client Error (400 - 499):
+        --> 400 - Bad Reuest
+        --> 401 - Unauthorised
+        --> 403 - Forbidden
+        --> 404 - Not Found
+        --> 409 - Conflict
+
+    --> Service Error (500 - 599):
+        --> 500 - Internal server Error
+        --> 501 - Not implemented
+        --> 502 - Bad Gateway
+        --> 503 - Service unavailable
+        --> 504 - Gateway Timeout
+
+
+49. Ports and their security:
+    --> Insecure Port:
+        --> 21 FTP: File Transfer Protocol esnds the unsername and password using plaintext from the client to the server
+    --> Secure Port:
+        --> 22 SFTP: Uses encryption to protect the users' credentials and packets of data being transfered
+
+    --> Insecure Port:
+        --> 23 TELNET: All information to & from the host on a telnet connection is sent in plaintext & can be intercepted by an attacker
+    --> Secure Port:
+        --> 22 SSH: Secure Shell on port 22 uses encryption to ensure that traffice between teh host and terminal is not sent in a plaintext format
+
+    --> Insecure Port:
+        --> 25 SMTP: Simple AMil Transfer Protocol is the default for sending email messages. Since it is unencrypted, data contained within the emails could be discovered by network sniffing.
+    --> Secure Port:
+        --> 587 SMTP: The secure alternative is to use port 587 for SMTP using Transport Layer Security which will encrypt the data between the mail client and the mail server
+
+    --> Insecure Port:
+        --> 37 TIME: Time protocol, may be inuse by legacy equipment and has mostly been replaced by using port 123 for Network Time Protocol.
+    --> Secure Port:
+        --> 123 NTP: NTP on port 123 offers better error-handling capabilities, which reduces the likelihood of unexpected errors.
+
+    --> Insecure Port:
+        --> 53 DNS: Domain Name Service used widely.
+    --> Secure Port:
+        --> 853 DoT: However, using DNS oer TLS(DOT) on port 853 protects DNS information from being modified in transit
+
+    --> Insecure Port:
+        --> 80 HTTP: Hyper Text Transfer Protocol is the basis of nearly all web browser traffic on the internet.
+        --> Information sent via HTTP is not encrypted and is susceptible to sniffing attacks.
+    --> Secure Port:
+        --> 443 HTTPS: HTTPS using TLS encryption is preferred, as it protects the data in transit between the server and the browser
+
+    --> Insecure Port:
+        --> 143 IMAP: Internet Message Access Protocol is a protocol used for retrieving emails. IMAP traffic on port 143 is ot encrypted and susceptible to networking sniffing.
+    --> Secure Port:
+        --> 993 IMAP: The secure alternative is to use port 993 for IMAP, which adds SSL/TLs security to encrpyt the data between the mail client and the mail server
+
+    --> Insecure Port:
+        --> 445 SMB: Server Message Block, is used by many versions of Windows for accessing files over the network.
+        --> Files are transmitted unencrypted.
+    --> Secure Port:
+        --> 2049 NFS: Network File System can use encryption, it is recommended that NFS not be allowed through firewalls either.
+
+    --> Insecure Port:
+        --> 389 LDAP: Lightwieght Directory Access Protocol, is used to communitcate directory information from servers to clients.
+        --> Since LDAP is not encrypted, it is susceptible to sniffing and manipulation attacks.
+    --> Secure Port:
+        --> 636 LDAPS: Lightweight Directory Access Protocol Secure adds SSL/TLS LADAPS security to protect the infromation while it is in transit.
+
+
+50. os.startfile("file_path"):
+    --> This function can open the any file you want
+    --> You just have to give the path of the file with the extension and it will open it for you
+    --> It can open almost every type of file
+
+
+51. Battery percentage checker and Memory checker:
+    --> Battery:
+        --> By using the psutil module you can check the battery percentage
+        --> You can also see that how many secs are left before power off and the battery is power plugged or not
+        --> code:
+                    battery = psutil.sensors_batter()
+
+
+    --> Memory:
+        --> You can also see the usage of the disk by using the psutil
+        --> You will have to give the character of the path and then put ':'
+        --> code:
+                    memory = psutil.disk_usage("C:")
+        --> It will show:
+                        --> Total memory
+                        --> Used memory
+                        --> Free memory
+                        --> Percentage of used memory compare to total memory
+
+
+52. Search a topic on Wikipedia:
+    --> Wikipedia is world's most used reference website
+    --> In the python, by using the wikipedia library, you can get the paragraph of a topic which is available in the wikipedi
+    --> code:
+                article = wikipedia.summary("topic name", auto_suggest=False)
+    --> You can also get the url of the page
+                url = wikipedia.page("topic name", auto_suggest=False).url
+
+
+    --> Other methods are also available which you can see by adding a '.' after 'wikipedia.page()'
+
+
+53. IP address (Internet Protocol address):
+    --> IP address is a very important component in the internet and computer networking
+        --> IP addresses uniquely identify devices on a network, it is just like street address helps o identify a location in the physical world, an IP address helps identify devices in the digital wolrd
+        --> IP addresses facilitate the routing of data packets between devices on a network and across different networks.
+        --> Routers use IP addresses to determine the most efficient path for data to travel from the source to the destination.
+        --> Devices use IP addresses to send and receive data packets, allowing them to communicate with each other over the Internet or local networks.
+        --> IP addresses provide a standardized way of addressing devices, which simplifies the process of configuring and managing networks
+            --> Without IP addresses, it would be challenging to organize and manage the vast number of devices connected to the Internet.
+        --> IP addresses can provide information about the geographic location of a device, while this information is not always precise, it can eb useful for various purposes.
+
+
+        --> Each IP address is unique, menaing that no two devices on the internet can have the same IP address at the same time.
+        --> There are two main versions of IP addresses: IPv4 and IPv6
+            --> IPv4:
+                --> Pv4 addresses are 32-bit numerical labels written in the form of four octets separated by periods (e.g., 192.168.1.1)
+
+            --> IPv6:
+                --> IPv6 addresses are 128-bit hexadecimal values written in the form of eight groups of four hexadecimal digits separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334)
+
+            --> Today, IPv4 is still widely used, but due to the depletion of available IPv4 addresses, IPv6 has been introduced, offering a much larger address space to accommodate the growing number of devices connected to the Internet.
+
+        --> IP addresses are structured hierarchically, with different portions of the address indicating the network and the host
+        --> Public IP addresses are routable on the internet and are used to identify devices connected directly to the internet.
+        --> Private IP addresses are reserved for use within private networks and are not routable on the internet without address translation (NAT).
+        --> With dynamic assignment, IP addresses are assigned to devices dynamically by a DHCP (Dynamic Host Configuration Protocol) server when they connect to a network
+        --> With static assignment, IP addresses are manually configured and remain constant unless changed by an administrator
+
+        --> Classes of IP addresses:
+            --> Class A:
+                --> Range: 0.0.0.0 to 127.255.255.255
+                --> The first bit of a Class A address is always 0, indicating that it belongs to the Class A range.
+                --> The first octet (8 bits) represents the network portion, and the remaining three octets represent the host portion.
+                --> Example use: Class A addresses were initially allocated to very large organizations or entities with many hosts.
+                    However, due to the sheer number of addresses in this class, they are not commonly used for individual organizations anymore.
+
+            --> Class B:
+                --> Range: 128.0.0.0 to 191.255.255.255
+                --> The first two bits of a Class B address are always 10.
+                --> The first two octets represent the network portion, and the last two octets represent the host portion.
+                --> Example use: Class B addresses were typically allocated to medium-sized organizations or ISPs serving a moderate number of hosts.
+
+            --> Class C:
+                --> Range: 192.0.0.0 to 223.255.255.255
+                -->The first three bits of a Class C address are always 110.
+                -->The first three octets represent the network portion, and the last octet represents the host portion.
+                -->Example use: Class C addresses were primarily assigned to small organizations or individual networks as they offer fewer host addresses compared to Class A and Class B.
+
+            --> Class D (Multicast) :
+                --> Range: 224.0.0.0 to 239.255.255.255
+                --> Addresses in this range are reserved for multicast addressing, where data is sent from one source to multiple destinations simultaneously.
+
+            --> Class E (Reserved):
+                --> Range: 240.0.0.0 to 255.255.255.255
+                --> Addresses in this range are reserved for future use or experimental purposes.
+
+
+54. enumerate():
+    --> This function is used to add a counter to an iterable (such as a list, tuple, or string) and returns it as an enumerate object.
+    --> This enumerate object can then be used directly in loops or converted into a list of tuples.
+    --> Each tuple contains a pair consisting of the index (starting from zero) and the corresponding item from the iterable.
+    --> example 1:
+                    fruits = ['apple', 'banana', 'cherry']
+
+                    for index, fruit in enumerate(fruits):
+                        print(index, fruit)
+
+        output:
+                0 apple
+                1 banana
+                2 cherry
+
+    --> example 2:
+                    fruits = ['apple', 'banana', 'cherry']
+
+                    for index, fruit in enumerate(fruits, start=1):
+                        print(index, fruit)
+
+        output:
+                1 apple
+                2 banana
+                3 cherry
+
+
+    --> enumerate is particularly useful in for loops where you need to keep track of the index of the items.
+    --> It improves the readability of the code by avoiding the need to manually manage a counter variable.
+    --> When you have multiple sequences to iterate over, and you need indexes for one or more of them.
+
+
+55. List Comprehensions:
+    --> List comprehension is the concise way to create a list.
+    --> They provide a syntactic way to generate lists from existing lists or other iterables by applying an expression to each element and optionally filtering elements with a condition.
+    --> Also we don't need a for loop for it to create or sort/filtering the each element in the list
+    --> code:
+                squares = [x ** 2 for x in range(10)]
+                print(squares)
+
+            --> In the code x ** 2 means the square of x, and for x in range(10) will itereate the value from 0 to 10
+            --> And x ** 2 for x in range(10) will create a list of squares from 0 to 10 and store it in the 'squares' variable
+
+    --> code:
+                evens = [x for x in range(10) if x % 2 == 0]
+                print(evens)
+
+            --> In the code this will make a list of all even numbers from 0 to 10
+            --> It will store the value in the list if the value of x % 2 is equalt to 0
+            --> You can also add multiple if conditions
+
+
+        --> You can also create a function which returns a number and use it in the list comprehensions
+
+    --> code:
+                matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+                flat_list = [num for row in matrix for num in row]
+                print(flat_list)
+
+            --> Output:
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+            --> This is the example of the nested list comprehension
+            --> In the code 'for row in matrix' will iterate the matrix and get the 3 lists
+            --> Now 'for num in row' will iterate that 3 lists and get the numbers inside the list
+            --> And at the end that numbers will stored in the variable named 'flat_list'
+
+
+56. Generator Comprehensions:
+    --> This is just like List comprehensions
+    --> You just have to remove the square brackets and put the parentheses, and it will give you the generators instead of the list
+    --> All examples of list comprehensions are similar to generator comprehensions(Just remove the square bracket and put parentheses)(NOTE: OUTPUT might not same)
+
+
+57. Set Comprehensions:
+    --> This is also just like List comprehension and Generator Comprehensions
+    --> You just have to put curely brackets and it will be a Set Comprehensions
+    --> All examples of list comprehensions are similar to Set comprehensions(NOTE: OUTPUT might not same)
+
+
+
+58. ZIP function in Python:
+    --> You can create a tuple which contains multiple iterables inside it.
+    --> This is useful for iterating over multiple sequences simultaneously.
+    --> This function is called ZIP function in the Python
+
+
+59. Dynamically Typed V/S Statically Typed:
+    --> DYNAMICALLY Typed: Python, JavaScript, Ruby
+        --> In dynamically typed languages, the type of a variable is known at runtime
+        --> The types are often determined automatically as the program executes
+
+        --> Type Checking at Runtime:
+            --> Type constraints and mismatches are checked while the program is running.
+            --> This can lead to type errors occurring during execution.
+
+        -->  implicit Type Declarations:
+            --> Programmers do not need to declare the type of a variable explicitly; the interpreter infers the type as the program runs.
+
+        --> Flexibility:
+            -->They are more flexible and allow for rapid development and prototyping since variables can be reassigned to different types.
+
+        --> Performance:
+            --> They might have slower performance compared to statically typed languages due to the overhead of runtime type checking and type inference.
+
+
+    --> STATICALLY Typed: Java, C++, Swift
+        --> In statically typed languages, the type of a variable is known at compile-time.
+        --> This means that the type of each variable must be declared or inferred before the code is executed.
+
+        --> Type Checking at Compile-Time:
+            --> The compiler verifies type constraints and mismatches before the program runs.
+            --> This can help catch errors early.
+
+        --> Explicit Type Declarations:
+            --> Programmers often need to explicitly declare the type of each variable (though some statically typed languages support type inference).
+
+        --> Performance:
+            --> Statically typed languages can be more performant since the type information is available at compile-time, allowing for optimizations.
+
+        --> Safety:
+            --> They tend to have fewer runtime type errors because many type-related issues are resolved during compilation.
+
+
+60. Compiled language and Interpreted language:
+    --> Compiled language:
+        --> The entire code is translated into machine code by a compiler before execution
+        --> It is faster, as the translation is done beforehand, and the machine code runs directly on the hardware without the need for further translation.
+        --> Error are detected during the comilation phase, which means that all syntax and some semantic errors are caught before the execution.
+        --> It is less portable, as the compiled machie code is specific to the target architecture.
+        --> Example: C, C+-, Rust, Go
+
+    --> Interpreted language:
+        --> Code is translated into machine code at runtime by an interpreter, which executes the code line-by-line.
+        --> It is slower, because the translation happens at runtime, which adds overhead.
+        --> Error are detected at runtime, which means that the progran may run until it hits an error, making debugging potentially more difficult
+        --> More portable, as the source code can be executed on any platform with the appropriate interpreter.
+        --> Example: Python, Ruby, Javascript, PHP
+
+61. Cyber Attacks:
+    --> Malware:
+        --> Malicious software designed to damage, disrupt, or gain unauthorized access to computer systems.
+        --> It Can steal data, encrypt files for ransom, spy on user activities, or damage system functions.
+        --> Types: Viruses, worms, trojans, ransomware, spyware, adware, and rootkits.
+
+    --> Phishing:
+        --> Fraudlent attempts to obtain sensitive information by disguising as a trustworthy entity.
+        --> It can lead to identity theft, financial loss, and unauthorised access to sensitive information.
+        --> Types: Spear phishing, Clone phishing, and Vishing.
+
+    --> Man-in-the-Middle (MitM) attack:
+        --> Attacker intercepts communication between two parties to steal or manipulate data
+        --> It can lead to data theft, financial loss, and unauthoriased access to communcations.
+        --> Types: Session hijacking, Wi-Fi eavesdropping, and SSL stripping
+
+    --> Denial of Servic (DoS) and Distributed Denial of Service (DDoS) attack:
+        --> Overwhelmming a system with traffic to make it unavailable to users
+        --> Disrputs services, causing downtime and potential financial loss.
+        --> Types: Flood attacks, Crash attacjs, and botnets.
+
+    --> SQL Injection:
+        --> Inserting malicious SQL queries into input fields to manipulate database.
+        --> It can lead to unauthorised access to database contents, data breacuhes, and data manipulation.
+
+    --> Cross-Site Scripting (XSS):
+        --> Injection malicious scripts into web pages viewed by other users.
+        --> It can steal cookies, session tokens, or other sensitive information from users.
+        --> Types: Stored XSS, Reflected XSS, and DOM-based XSS
+
+    --> Zero-Day exploit:
+        --> Attacks exploiting previously unknown vulnerabilities in software or hardware before the vendore can issue a patch.
+        --> It can lead to widespread damage before the vulnerability is fixed.
+
+    --> Password attack:
+        --> Attempts to gain unauthorised access to system by cracking or stealing passwords.
+        --> It can lead to unauthorised access, data breaches, and identity theft.
+        --> Brute force attacks dictionary attacks, and credential stuffing.
+
+    --> Eavesdropping attack:
+        --> Intercepting and listening to private communications
+        --> It can lead to data theft and loss of privacy
+        --> Types: Passive(simply listening) and Active(injecting malicious messages)
+
+    --> Insider Threat:
+        --> Threats originating from within the organisation, often by employees or contractors.
+        --> It can lead to data beaches, financial loss, and damage to reputation.
+        --> Types: Malicious insider and negligent insider
+
+    --> Advanced Persistent Threat (APT):
+        --> Propolonged and targeted cyber attack where an intruder gain access to a network and remains undetected for an extended period.
+        --> It can lead to significant data breaches, espionage, and sustained damage.
+
+    --> Drive-By Download:
+        --> Uninetntionally downloading malicious software by visiting a compromised website.
+        --> It can lead to malware infections and data theft.
+
+    --> IoT (Internet of Things) Attacks:
+        --> Exploiting vulnerabilities in connected devices.
+        --> It can lead to unauthorised control of devices, data breaches, and large-scale attacks.
+
+    --> Social Engineering:
+        --> Manipulating individuals into divulging confidential information or performing actions.
+        --> It can lead to data breaches, unauthorised access, and financial loss
+        --> Types: Phishing, pretexting, baiting,quid pro quo and tailgating.
+
+
+62. Malware:
+    --> Viruses:
+        --> Corrupt, delete, or modify files and also spread to other systems
+        --> Entry:
+            --> Downloading and executing infected files, such as email attachments, software from untrusted sources, or file-sharing networks.
+        --> Remove:
+            --> Disconnect from the internet
+            --> Go in Safe Mode
+            --> Run full system scan with antivirus software
+            --> Delete or Quarantine infected files
+            --> Update Software to patch vulnerabilities.
+
+    --> Worms:
+        --> Spreads through a network by replicating itself
+        --> Entry:
+            --> Find the weak points and attack on them (Exploiting vulnerabilities in OS/Applications) through network connections.
+        --> Remove:
+            --> Disconnect from the network
+            --> Go in Safe Mode
+            --> Run full system scan with antivirus software
+            --> Remove or Quarantine detected worms
+            --> Update software and system
+
+    --> Trojans:
+        --> Disguise itself as desireable code
+        --> Entry:
+            --> Disguising itself as a legitimate software, often downloaded from the internet, email attachments, or through social engineering.
+        --> Remove:
+            --> Disconnect from the internet
+            --> Go in Safe Mode
+            --> Run full system scan with antivirus/anti-malware software
+            --> Remove or Quarantine detected Trojans
+            --> Change Passwords
+
+    --> Ransomware:
+        --> Disable victim's access to data until ransom is paid
+        --> Entry:
+            --> Phishing emails with malicious attachments or links, exploit kits that take advantage of software vulnerabilities, or downloading from compromised websites.
+        --> Remove:
+            --> Disconnect from the network
+            --> Go in safe mode
+            --> Run full system scan with antivirus.anti-ransomware software
+            --> Use ransomware decryption tools(if possible)
+            --> Restore from backups if victim's files are encrypted and decryption is not possible
+            --> Report the attack to the authorities.
+
+    --> Spyware:
+        --> Collects user activity data without their knowledge
+        --> Entry:
+            --> Bundlled with legitimate software, through malicious websites, or via phishing emails.
+        --> Remove:
+            --> Go in safe mode
+            --> Run full system scan with anti-spyware software
+            --> Remove or Quarantine the detected sphyware
+            --> Change all passwords and monitor accounts for unusual activity.
+
+    --> Adware:
+        --> Serves unwatned advertisements
+        --> Entry:
+            --> Bundled with free software or downloaded from malicious website
+        --> Remove:
+            --> Go in safe mode
+            --> Run full system scan with antivirus/anti-adware software
+            --> Remove or Quarantine the detected adware
+            --> Uninstall unwanted programs through the control panel
+            --> Reset web browser settings to remove unwanted toolbars and exntesions
+
+    --> Rootkits:
+        --> Gives hackers remote control of victim's device
+        --> Entry:
+            --> Exploiting vulnerabilities, bundled with other types of malware, or installed by an attacker with physical or remote access.
+        --> Remove:
+            --> Go in safe mode
+            --> Run specialised rootkit removal tool
+            --> Perform a full system scan with antivirus software
+            --> Remove or Quarantine detected rootkits
+            --> Consider a system reinstallation if the rootkits is particularly stubborn.
+
+    --> Keyloggers:
+        --> Monitors users' keystroke
+        --> Entry:
+            --> Phising emails, malicious downloads, or physical installation by someone with access to the computer.
+        --> Remove:
+            --> Go in safe mode
+            --> Run full system scan with antivirus/anti-keylogger software
+            --> Remove or Quarantine detected keyloggers
+            --> Change all passwords and monitor for unauthorised access.
+
+    --> Bots and Botnets:
+        --> Launches a broad flood of attacks
+        --> Entry:
+            --> Exploiting vulnerabilities, phising emails, or downloading infected files.
+        --> Remove:
+            --> Disconnect from network
+            --> Go in safe mode
+            --> Run full system scan with the antivirus software
+            --> Remove or Quarantine bot malware
+            --> Update your system and software to patch vulnerabilities.
+
+    --> Fileless Malware:
+        --> Makes changes to files that are native to the OS
+        --> Entry:
+            --> Exploiting vulnerabilities, spear phising, or using legitimate system tools like PowerShell.
+        --> Remove:
+            --> Disconnect from the network
+            --> Go in safe mode
+            --> Run a full system scan with antivirus software
+            --> Use built-in system tool to check for unusual activities.
+            --> Terminate suspicious processes.
+            --> Update your system and apply all security patches.
+
+    --> Scareware:
+        --> It displays alarming messages or pop-ups
+        --> Entry:
+            --> Pop-up ads on websites, phising emails, or downloading from fake websites.
+        --> Remove:
+            --> Close the scareware pop-up without clicking any buttons within it
+            --> Go in safe mode
+            --> Run full system scan with antivirus/anti-malware software
+            --> Remove or Quarantine detecged scareware
+
+    --> Cryptojacking:
+        --> Runs in the background,  slow down the system, and consumes battery.
+        --> Entry:
+            --> Visiting compromised websites with malicious scripts, or downloading infected software.
+        --> Remove:
+            --> Disconnect from the internet
+            --> Go in safe mode
+            --> Run full system scan with antivirus software
+            --> Remove or Quarantine the detected cryptojacking scripts.
+            --> Check your browser for malicious extensions and remove them
+            --> Update your browser and system to close vulnerabilities.
+
+
+63. Phishing:
+    --> Email phishing:
+        --> Attackeers send fraudlent emails that appear to come from reputable source, such as banks, social media sites, or other trusted entities.
+            --> Attackers create a convincing email that appears legitimate.
+            --> The email usually contains a sense of urgency, promopting the user to click on the link or downlooad an attachment.
+            --> The link leads to a fake website that looks like the legitimate one, where the user is  asked to enter personal information and they will steal it.
+
+            --> Be cautious of unsolicited emails, especially those that create a sense of urgency
+            --> Verify the sender's email address.
+            --> See the atcual URL before clicking
+            --> Use email filtering and security softwares.
+
+    --> Spear phishing:
+        --> It targets specific individuals or organisation.
+        --> It's more personalised form of phishing that uses information about the target to make the attack more convincing.
+            --> Attackers research their targets to gather personal information.
+            --> They craft personalised emails that appear to come from a known source, like a colleague or a boss.
+            --> The email may contain a malicious link or attachment.
+
+            --> Use multi-factor authentication.
+            --> Verify request for sensitive information, especially if they seem unusual.
+            --> Implement and enforece strict email policies.
+
+    --> Whaling:
+        --> It is a type of spear phishing that targets high-profile individuals within an organisation, such as executives or senior management.
+            --> Attackers gather detailed information about the target.
+            --> They send highly personalized emails that appear to be urgent and from a trusted source.
+            --> The email may request sensitive information or direct the recipient to a malicious website.
+
+            --> Implement email authentication protocols like DMARC.
+            --> Use email filtering solutions.
+            --> Employ multi-factor authentication for accessing sensitive system.
+
+    --> Smishing (SMS Phishing) :
+        --> Smishing involves sending fraudlent text message to trick recipients into providing personal informationor donwloading malware.
+            --> Attackers send SMS messages that appear to come from a trusted source
+            --> The messafe often contains a link to a malicious website or promopts the recipients to call a fraudlent phone number.
+
+            --> Be wary of unsolicited text messages.
+            --> Avoid clicking on links in SMS messages from unknown sources.
+            --> Use security software that includes protection for mobile devices
+
+    --> Vishing (Voice Phishing) :
+        --> Vishing involves using phone calls to trick individuals into revelaing personal information.
+            --> Attackers call the target, pretending to be legitimate entity like a bank or government agency
+            --> They use soical engineering tactics to persuade the victim to provide sensitive information.
+
+            --> Be suspicious of unsolicited phone calls requesting personal information.
+            --> Verify the caller's identity by contacting the organisation directly using a knwon, official number.
+            --> Use call-blocking tools and services.
+
+    --> Clone Phishing:
+        --> Attackers create a nearly identical copy of a legitimate emmail that the target has previously received but with malicious links or attachments.
+            --> Attackers gain access to legitimate emals that the victim has previously received
+            --> They clone the email, replacing legitimate links or attachments with malicious ones.
+            --> The clone email is sent to the target, often with a plausible reason for the resend.
+
+            --> Verify unexpected resend of emails, especially those requesting sensitive actions.
+            --> Use email security solutions to detect cloned emails
+
+    --> Pharming:
+        --> It redirects users from a legitimate website to fraudlent one, often by exploiting vulnerabilities in DNS servers.
+            --> Attackers compromise DNS servers or use malware to redirect users
+            --> When usres type the correct website address, they are redirected to a fraudlent site that looks identical to the legitimate one.
+            --> The fake site collects login credentials and other presonal information.
+
+            --> Use DNS security extensions (DNSSEC)
+            --> Keep systems and software up to date.
+            --> Use anti-malware and anti-virus solutions.
+
+    --> Man-in-the-Middle Phishing:
+        --> Attackers intercept communication between the user and a legitimate website to capture sensitive information.
+            --> Attackers position themselves between the victim and the website, often using a compromised Wi-Fi network or malicious software.
+            --> They capture data transmitted between the victim and the website, including login credentials and personal infomration.
+
+            --> Use secure connection for sensitve transactions.
+            --> Avoid using public Wi-Fi networks for accessing sensitive information.
+            --> Use virtual private networks.
+            --> Implement strong encryption methods.
+
+    --> Angler Phishing:
+        --> It involves using solcial media platforms to deceive users into providing personal infomration or clicking on malicious links.
+            --> Attacjers create fake soical media accounts that mimic legitimate customer service accounts.
+            --> They respond to uessr complaints or queries with malicious links or request for personal information.
+
+            --> Verify social media accounts before interacting with them
+            --> Be cautious of unsoliited messages or responses on social media.
+            --> Use the official website to contact customer service.
+
+
+64. Man-in-the-Middle Attack:
+    --> Packet Sniffing:
+        --> Attackers use packet sniffing tools to capture and anlyse data packet traveling over a network
+        --> They can intercept sensitive information like login, credentials, credit card numbers, and personal messages.
+
+        --> Use encryption protcols to protect data in transit.
+        --> Implement secure Wi-Fi networks with strong encryption
+        --> Use Virtual Private Network (VPN) to encrypt all interent traffic
+
+    --> Session Hijacking:
+        --> Attackes steal session cookies from a user's web broweser to gain unauthorised access to a web session.
+        --> This often happen after the user has authenticated with the web application.
+
+        --> Use session management practices.
+        --> Implement Mulit-Factor Authentication
+        --> Use HTTPS to encrypt sessions.
+
+    --> SSL Stripping:
+        --> Attackers downgrade a secure HTTPS connection to an unsecure HTTP connection, intercepting and manipulating the data.
+        --> This is done by acting as a proxy between the client and the server, presenting an HTTP site to the client while manipulating an HTTPS connection with the server.
+
+        --> Use HTTP Strict Transport Security (HSS) to ensure broweser connect only via HTTPS.
+        --> Educate users to look for HTTPS and avoid clikcing through security warning.
+        --> Use strong encryption and certificate pinning.
+
+    --> Wi-Fi Eavesdropping:
+        --> Attackers set up rogue Wi-Fi hotspot to intercept data transmit over the network.
+        --> Users unknownlingly connect to these malicious networks, thinking they are legitimate.
+
+        --> Avoid connecting to public Wi-Fi networks, esepcially without VPN
+        --> Use VPNs to secure your internet connection.
+        --> Disable automatic connection to known networks
+
+    --> DNS Spoofing:
+        --> Attackers alter DNS records to redirect traffic from legitiamte websites to malicious ones.
+        --> Users attempting to visit a legitimate site are instead directed to a fake site controlled by the attacker.
+
+        --> Use DNS security extensions to validate DNS response
+        --> Implement firewalls and intrusions detection system to detect annd block suspicious activites.
+        --> Regularly update and patch DNS servers.
+
+    --> Email Spoofing:
+        --> Attackers compromise email accounts and intercept or alter email communications.
+        --> They can use this access to impersonate the victim and manipulate financial transactions or spread malware.
+
+        --> Use strong, unique passwords and enable MFA for email accounts.
+        --> Employ email encryption and secure email gateways.
+
+    --> IP Spoofing:
+        --> Attacker disuise their IP address to appear as a trusted source.
+        --> This allow them to intercept or alter data meant for another device on the network
+
+        --> Implement IPsec to encrypt IP packets.
+        --> Use anti-spoofing measures like packet filtering on routers
+        --> Enable network monitoring to detect unusual traffic patterns.
+
+    --> Rogue Access Points:
+
+        --> Attackers set up unauthorised access points that mimin legitiamte ones.
+        --> User connect to these rogue access points, allowing attackers to intercept their data
+
+        --> Conduct regular scans to detect unauthorised access points.
+        --> Use wireless intrusions preventions systems

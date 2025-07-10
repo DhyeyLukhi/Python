@@ -1,0 +1,73 @@
+1. Serial.begin(9600) or
+   Serial.begin(12500)	--> This function helps to communicate between the Computer and Arduino
+			--> Without this function the Arduino and PC can't communicate to each other
+			--> This function also helps to Transfer the Data to each other
+			--> Serial.begin(9600) -- here 9600 is a value in bits/second which is for Data Transfer
+
+2. pinMode(pin, ,mode)
+    --> mode = INPUT/OUTPUT
+    --> This function tells to Arduino that which number of pin we will use and for input/output
+
+        --> mode has an option called INPUT_PULLUP
+        --> which sets the default value of input as HIGH
+
+3. digitalWrite(pin, value)
+    --> value = HIGH/LOW
+    --> This function tells to Arduino that which number of pin will receive/transfer which kind of data
+    --> Setting Mode to HIGH will transfer 5V from that number of pin
+    --> Setting Mode to LOW will transfer 0V from that number of pin
+
+4. delay(milliseconds)
+    --> delay function can pause the Arduino at the specific line for milliseconds you entered
+
+5. Serial.read()
+    --> Serial.read() function will read the Data from the Input
+    --> You can also store the Data to any variable using the Serial.read()
+    --> This function takes the input from the Serial Monitor
+
+6. Serial.print()
+    --> Serial.print() function can print the value of the variable
+    --> Serial.print() function prints the value of variable in the Serial Monitor
+    --> Serial.println() does the same thing, but it adds a '\n' automatically at the end of the print statement.
+
+7. Serial.available()
+    --> Serial.available() is a function which can helps to identify that the PC and Arduino are communicating to each other with the Serial Port or not
+    --> That's basically return the value '1' is they are communicating, otherwise return 0
+
+8. Storage, Data Type, and Range
+    --> 1. Byte - storage = 8-bit - Range(0, 255)
+    --> 2. Word - storage = 16-bit - Range(0, 65,535)
+    --> 3. Short - storage = 16-bit - Range(-32,768, 32,767)
+    --> 4. Int - storage = 16-bit - Range(-32,768, 32,767)
+    --> 5. Long - storage = 32-bit - Range(-2,147,483,647,  2,147,483, 647)
+    --> 6. Float - Range(-3.4028235 * 10^38, 3.4028235 * 10^38)
+    --> 7. Unsigned Int - storage = 16-bit - Range(0, 65,535)
+    --> 8. Unsigned Long - storage = 32-bit - range(0, -4,294,967,295)
+
+9. String and Character
+    --> Character must be in single quote
+            char variable = 'value';
+    --> String must be in Double quote
+            String variable = "Value of the Variable \n This is the Paragraph";
+
+    --> Syntax of Array is much similar to C language
+
+10. digitalRead(pin)
+    --> digitalRead() is a function which is used to Read the Data from the Digital Pin
+    --> Here 'pin' is the number of the pin which will receive Data and digitalRead() will read it.
+
+11. analogRead(analogPin)
+    --> analogRead() function can read the input from the analog pins of the Arduino Board
+    --> It takes the input in the range of 0V to 5V
+    --> It is only made for the analog pins
+        --> Analog pins : For Digital Output
+                          For Digital Input
+                          For Analog Input
+
+12. analogWrite(PMWpin, value)
+    --> range of value is 0 to 255
+    --> analogWrite() function can write the analog value to PWM pins (~[number] pins on the Arduino)
+        --> PWM stand for Pulse Width Modulation
+        --> PWM pins are 3, 5, 6, 9, 10, 11 at the Digital port of Arduino
+    --> Analog pin will generate the value of 0V to 5V depends on the Input of 0 to 255
+    --> It can be used to light the LED at varying Brightness or drive a motor at various speed.
