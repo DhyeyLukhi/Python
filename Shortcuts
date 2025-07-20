@@ -1,0 +1,5 @@
+1.  /etc/default/grub : for editing the choose option of kali linux before booting up the linux
+
+2. wget http://ftp.us.debian.org/debian/pool/main/m/mesa/libgl1-mesa-glx_20.3.5-1_amd64.deb
+	sudo dpkg -i libgl1-mesa-glx_20.3.5-1_amd64.deb :For getting the libgl1-mesa-glx dependency manually
+
