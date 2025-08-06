@@ -2,22 +2,36 @@ import keyboard
 import pyautogui
 import time
 import pynput
-
+import threading
 
 def recordKeys():
-    event = keyboard.record('enter')
-    with open('.keys.txt', 'w') as file:
-        for e in event:
-            if e.event_type == 'down':
-                file.write(f"'{e.name}'")
-    
+    while True:
+        event = keyboard.record('enter')
+        with open('.keys.txt', 'w') as file:
+            for e in event:
+                if e.event_type == 'down':
+                    file.write(f"'{e.name}'")
+
+
+def mouseMonitor():
+    while True:
+        position = pyautogui.position()
+        size = pyautogui.size()
+        print(f"Click on X:{position.x}   Y:{position.y}    Size: Width:{size.width}  Height{size.height}")
+        time.sleep(1)
+
+
 
 if __name__ == "__main__":
     print("Hello user...")
     print("I want to record some keys from your keyboard")
-    recordKeys()
+    keyboardThread = threading.Thread(target=recordKeys)
+    mouseThread = threading.Thread(target=mouseMonitor)
 
-    
+    keyboardThread.start()
+    mouseThread.start()
+    keyboardThread.join()
+    mouseThread.join()    
 
 
 
