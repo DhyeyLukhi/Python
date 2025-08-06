@@ -222,7 +222,7 @@
                 --> datetime.datetime.now().strftime('%g') : 24                         {Year in short}
                 --> datetime.datetime.now().strftime('%H') : 11                         {Hour of day in 24 hour clock formate}
                 --> datetime.datetime.now().strftime('%h') : Jan                        {Month in short}
-                --> datetime.datetime.now().strftime('%I') : 11                         {Hour of day in 12 hour clock formate
+                --> datetime.datetime.now().strftime('%I') : 11                         {Hour of day in 12 hour clock formate}
                 --> datetime.datetime.now().strftime('%j') : 001                        {Day of year}
                 --> datetime.datetime.now().strftime('%M') : 24                         {Minutes}
                 --> datetime.datetime.now().strftime('%m') : 01                         {Month}
