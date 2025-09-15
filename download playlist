@@ -1,4 +1,7 @@
-pytube module
+import pytube
+
+p = input("Enter playlist URL: ")
+p = pytube.Playlist(p)
 
 for video in p.videos():
 	video.stream.first().download()
