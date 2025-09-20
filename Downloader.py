@@ -54,7 +54,7 @@ def main():
     if 'entries' in info:  # Playlist
         print("Detected playlist.")
         playlist_title = info.get('title', 'Playlist')
-        os.makedirs(playlist_title, exist_ok=True)
+        # os.makedirs(playlist_title, exist_ok=True)
         first_video = info['entries'][0]
         selected_format = select_format(first_video['formats'])
         target_height = int(selected_format['height'])
