@@ -1,5 +1,6 @@
 import subprocess
 import webbrowser
+import PyDictionary
 
 def define(word):
     result = subprocess.run(["dict", word], capture_output=True, text=True)
