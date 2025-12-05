@@ -22,7 +22,7 @@
     No compression flags → max quality
 
     For PNG to PNG with Max Clarity:
-    convert input.png -define png:compression-level=0 output.png
+        convert input.png -define png:compression-level=0 output.png
 
 4. Image Converter (Best Storage):
     convert input.jpg -quality 40 output.jpg
@@ -31,7 +31,7 @@
     Good balance of clarity + small size
 
     For webp:
-    convert input.png -quality 30 output.webp
+        convert input.png -quality 30 output.webp
 
 5. Video Converter (Best Quality):
     ffmpeg -i input.mkv -c:v libx264 -preset veryslow -crf 15 -c:a copy output.mp4
@@ -67,7 +67,7 @@
 
 
     PNG lossless:
-    optipng -o2 input.png
+        optipng -o2 input.png
 
 10. Image Compression (Best Stoarge):
     convert input.jpg -quality 40 output.jpg
@@ -76,6 +76,18 @@
 
 
     For extreme savings (WebP):
-    cwebp input.png -q 30 -o output.webp
+        cwebp input.png -q 30 -o output.webp
 
-11. 
+11. Start Bluetooth:
+    sudo systemctl start Bluetooth
+
+
+    Start evertytime at login:
+        sudo systemctl enable bluetooth
+
+12. Terminating Bluetooth:
+    sudo systemctl stop bluetooth
+
+
+    Stop starting at login:
+        sudo systemctl disable bluetooth
