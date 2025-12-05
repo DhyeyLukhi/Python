@@ -1,0 +1,81 @@
+1. Video to Audio (Best Quality):
+    ffmpeg -i input.mp4 -vn -acodec pcm_s16le -ar 48000 -ac 2 output.wav
+
+    -vn remove video
+    pcm_s16le uncompressed WAV (maximum quality)
+    -ar 48000 48 kHz audio sampling
+    -ac 2 stereo
+
+2. Video to Audio (Best Storage):
+    ffmpeg -i input.mp4 -vn -acodec libmp3lame -b:a 96k output.mp3
+
+    libmp3lame MP3 codec
+    -b:a 96k low but clear bitrate
+    Ideal for saving storage
+
+3. Image Converter (Best Quality):
+    convert input.png output.jpg
+
+    Works for Any Format to Any Format
+    Default ImageMagick conversion
+    Keeps high detail
+    No compression flags → max quality
+
+    For PNG to PNG with Max Clarity:
+    convert input.png -define png:compression-level=0 output.png
+
+4. Image Converter (Best Storage):
+    convert input.jpg -quality 40 output.jpg
+
+    -quality 40 compress image
+    Good balance of clarity + small size
+
+    For webp:
+    convert input.png -quality 30 output.webp
+
+5. Video Converter (Best Quality):
+    ffmpeg -i input.mkv -c:v libx264 -preset veryslow -crf 15 -c:a copy output.mp4
+
+    libx264 stable H.264 encoder
+    veryslow best compression efficiency
+    crf 15 near-lossless
+    copy keeps original audio
+
+6. Video Converter (Best Storage):
+    ffmpeg -i input.mkv -c:v libx265 -preset medium -crf 28 -c:a aac -b:a 96k output.mp4
+     
+    libx265 very efficient HEVC codec       
+    crf 28 lightweight
+    aac 96k small audio bitrate
+
+7. Video Compression (Best Quality):
+    ffmpeg -i input.mp4 -c:v libx264 -crf 18 -preset slow -c:a copy output.mp4
+
+    libx265 very efficient HEVC codec
+    crf 28 lightweight
+    aac 96k small audio bitrate
+
+8. Video Compression (Best Storage):
+    ffmpeg -i input.mp4 -c:v libx265 -crf 30 -preset medium -c:a aac -b:a 64k output.mp4
+
+    HEVC shrinks dramatically
+    crf 30 small size
+    64k audio bitrate
+
+9. Image Compression (Best Quality):
+    convert input.jpg -quality 85 output.jpg
+
+
+    PNG lossless:
+    optipng -o2 input.png
+
+10. Image Compression (Best Stoarge):
+    convert input.jpg -quality 40 output.jpg
+    
+    Heavy compression
+
+
+    For extreme savings (WebP):
+    cwebp input.png -q 30 -o output.webp
+
+11. 
