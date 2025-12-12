@@ -1,0 +1,371 @@
+1. Install packages (Debian/Ubuntu) — install tools you'll need
+	sudo apt update && sudo apt install -y ffmpeg imagemagick ghostscript pandoc tesseract-ocr unoconv poppler-utils sox qpdf exiftool wkhtmltopdf unzip p7zip-full python3-venv
+
+	- `-y`: assume yes to prompts
+	- Replace `apt` with `dnf`/`yum`/`pacman` on other distros; you may need `sudo` for installs.
+
+
+2. Create a Python virtual environment
+	python3 -m venv .venv
+	source .venv/bin/activate
+
+	- Use `.venv` or `env` as folder name.
+	- After activate: `pip install -r requirements.txt`.
+
+
+3. Upgrade pip and install packages inside venv
+	pip install --upgrade pip setuptools wheel
+	pip install -r requirements.txt
+
+	- `requirements.txt` lists Python packages.
+	- Use `pip install package==version` to pin versions.
+
+
+4. ffmpeg — convert video format (e.g., mov → mp4 H.264)
+	ffmpeg -i input.mov -c:v libx264 -preset slow -crf 23 -c:a aac -b:a 192k output.mp4
+
+	- `-c:v libx264`: use H.264 video codec.
+	- `-crf`: quality (lower = better quality, 18-28 typical).
+	- `-preset`: encoding speed/efficiency (`ultrafast`→`veryslow`).
+
+
+5. ffmpeg — convert audio only (extract/convert audio)
+	ffmpeg -i input.mp4 -vn -c:a libmp3lame -q:a 2 output.mp3
+
+	- `-vn`: drop video.
+	- `-q:a 2`: quality for VBR MP3 (lower = better).
+
+
+6. ffmpeg — convert video to webm (VP9)
+	ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 0 -crf 30 -c:a libopus output.webm
+
+	- `-b:v 0 -crf`: use CRF-based quality (for VP9).
+	- `libopus` for modern audio.
+
+
+7. ffmpeg — extract images from video (frames)
+	ffmpeg -i input.mp4 -vf "fps=1" frame_%04d.png
+
+	- `fps=1`: one frame per second; change as needed.
+	- Use `-vf scale=1280:-1` to rescale while extracting.
+
+
+8. ffmpeg — make GIF from video
+	ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos" -gifflags -transdiff -y output.gif
+
+	- `fps` and `scale` control smoothness and size.
+	- Use a palette for higher quality: generate palette + use it.
+
+
+9. ffmpeg — concatenate videos (same codec/params)
+	printf "file '%s'\n" part1.mp4 part2.mp4 > list.txt
+	ffmpeg -f concat -safe 0 -i list.txt -c copy output.mp4
+
+	- `-c copy` fast remux; use re-encoding if codecs differ.
+
+
+10. ffmpeg — trim/clip video
+	ffmpeg -ss 00:01:00 -i input.mp4 -to 00:00:30 -c copy clip.mp4
+
+	- `-ss` start time, `-to` duration or end time.
+	- Put `-ss` before `-i` for fast but less-accurate seeking.
+
+
+11. ffprobe — inspect media file metadata
+	ffprobe -v error -show_format -show_streams input.mp4
+
+	- Use `-of json` to get JSON output.
+
+
+12. sox — convert audio, resample, change channels
+	sox input.wav -r 44100 -c 2 output.wav
+
+	- `-r`: sample rate, `-c`: channels.
+	- Use `sox input.mp3 output.wav trim 0 30` to cut 30s.
+
+
+13. lame — encode WAV → MP3
+	lame -V2 input.wav output.mp3
+
+	- `-V2`: VBR quality (0 best, ~5 smaller).
+
+
+14. convert (ImageMagick) — convert images (png → jpg)
+	convert input.png -quality 85 -strip output.jpg
+
+	- `-quality`: JPEG quality.
+	- `-strip`: remove metadata.
+
+
+15. mogrify (ImageMagick) — batch convert all PNGs → JPGs
+	mogrify -format jpg -quality 85 -path out_dir *.png
+
+	- `-path` to output directory.
+
+
+16. convert — resize and change density for PDFs/screenshots
+	convert -density 300 input.pdf -resize 1024x -quality 90 output.jpg
+
+	- `-density` affects rasterization resolution for PDFs.
+	- Use `-flatten` to remove alpha.
+
+
+17. identify (ImageMagick) — inspect image properties
+	identify -verbose input.png
+
+	- Gives colorspace, resolution, format, EXIF, etc.
+
+
+18. inkscape — SVG → PNG or PDF
+	inkscape input.svg --export-type=png --export-filename=output.png --export-width=1024
+
+	- `--export-type=pdf` for PDF output.
+	- Use `rsvg-convert` for headless conversions.
+
+
+19. rsvg-convert (librsvg) — SVG → PNG
+	rsvg-convert -w 800 -h 600 -f png -o output.png input.svg
+
+	- Fast, ideal for many SVGs in scripts.
+
+
+20. cwebp / dwebp — PNG/JPG ↔ WebP
+	cwebp -q 80 input.png -o output.webp
+	dwebp output.webp -o restored.png
+
+	- `-q` quality 0-100.
+
+
+21. vips (libvips) — high-performance image conversion (recommended for large images)
+	vipsthumbnail input.tif -s 1024 -o output.jpg[Q=85]
+
+	- Very fast and low-memory; `vipsthumbnail` auto-preserves aspect.
+
+
+22. exiftool — strip or move EXIF metadata and convert formats
+	exiftool -all= -overwrite_original in.jpg
+	exiftool -tagsfromfile in.jpg out.jpg
+
+	- `-all=` removes metadata; `-overwrite_original` avoids creating extra files.
+
+
+23. tesseract — image → plain text (OCR)
+	tesseract input.png output_txt -l eng --psm 3
+
+	- `-l`: language, `--psm`: page segmentation mode.
+	- Output formats: `output_pdf` to produce searchable PDF.
+
+
+24. pdftotext (poppler) — PDF → TXT
+	pdftotext input.pdf output.txt
+
+	- `-layout` preserve original layout, `-raw` raw text.
+
+
+25. pdftoppm — PDF → images (PNG/JPG)
+	pdftoppm -png -r 300 input.pdf output_prefix
+
+	- `-r` DPI; results: `output_prefix-1.png`, etc.
+
+
+26. ghostscript (gs) — compress or convert PDF
+	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=out.pdf in.pdf
+
+	- `-dPDFSETTINGS=/screen|/ebook|/printer|/prepress` tradeoff quality vs size.
+
+
+27. qpdf — linearize / rewrite PDF and remove encryption
+	qpdf --linearize in.pdf out_linearized.pdf
+	qpdf --decrypt in_protected.pdf out_unlocked.pdf
+
+	- Useful for PDF optimization and page extraction.
+
+
+28. pdftk (if installed) — split/merge PDFs
+	pdftk A=in1.pdf B=in2.pdf cat A1-3 B4-5 output merged.pdf
+
+	- Use `burst` to split into single pages.
+
+
+29. libreoffice / soffice — convert office docs headless (docx → pdf)
+	libreoffice --headless --convert-to pdf --outdir out_dir input.docx
+
+	- `--convert-to` supports many formats (pdf, docx, odt, html).
+	- `unoconv` is another wrapper that uses LibreOffice.
+
+
+30. pandoc — convert between markup/document formats (md → pdf/docx)
+	pandoc input.md -o output.pdf --pdf-engine=xelatex --toc
+	pandoc input.md -o output.docx
+
+	- `--pdf-engine` choose `xelatex`, `wkhtmltopdf`, or `weasyprint`.
+	- Supports templates, metadata, filters.
+
+
+31. wkhtmltopdf — HTML → PDF (render with WebKit)
+	wkhtmltopdf --enable-local-file-access input.html output.pdf
+
+	- `--enable-local-file-access` allow local resources.
+	- Good for complex CSS-based layouts.
+
+
+32. html2text / lynx / wkhtmltoimage — HTML → plain text or image
+	lynx -dump input.html > output.txt
+	wkhtmltoimage input.html output.png
+
+	- `lynx -dump` useful for quick textual extraction.
+
+
+33. iconv — change text encoding (e.g., windows-1252 → utf-8)
+	iconv -f WINDOWS-1252 -t UTF-8 input.txt -o output.txt
+
+	- `-f` from, `-t` to encoding.
+	- Use `file -i` to guess encoding.
+
+
+34. dos2unix / unix2dos — convert line endings
+	dos2unix input.txt
+	unix2dos input.txt
+
+	- Quick fix for CRLF vs LF issues.
+
+
+35. base64 / xxd — binary ↔ text
+	base64 input.bin > output.b64
+	base64 -d output.b64 > restored.bin
+	xxd -p input.bin > hex.txt
+
+	- Useful for embedding binaries in text files.
+
+
+36. zip / unzip / 7z / tar — archive / compress / decompress
+	zip -r archive.zip folder/
+	unzip archive.zip -d out_dir
+	tar -cJf archive.tar.xz folder/
+	tar -xvf archive.tar.gz
+	7z a archive.7z folder/
+
+	- `-r` recursive, `-c` create, `-x` extract, `-J` xz compression.
+
+
+37. zstd / gzip / bzip2 / xz — compress files
+	gzip file.txt
+	bzip2 file.txt
+	xz file.txt
+	zstd -19 file.txt -o file.txt.zst
+
+	- `zstd` often gives better speed/ratio; `-19` high compression.
+
+
+38. pandoc + wkhtmltopdf combo — Markdown → HTML → PDF with CSS
+	pandoc input.md -o output.html
+	wkhtmltopdf --enable-local-file-access output.html output.pdf
+
+	- Use when you need CSS styling in the PDF.
+
+
+39. youtube-dl / yt-dlp — download and convert online video → audio
+	yt-dlp -x --audio-format mp3 --audio-quality 0 URL
+
+	- `-x` extract audio, `--audio-format` choose `mp3`, `m4a`, etc.
+
+
+40. gifsicle — optimize GIFs and convert frames → GIF
+	gifsicle --optimize=3 --colors 128 input.gif -o out.gif
+
+	- Great for reducing GIF size.
+
+
+41. imagemagick montage — combine multiple images into one
+	montage img1.jpg img2.jpg -tile 2x1 -geometry +2+2 output.jpg
+
+	- `-tile` grid, `-geometry` spacing.
+
+
+42. ffmpeg — convert images to video (timelapse)
+	ffmpeg -framerate 30 -pattern_type glob -i '*.jpg' -c:v libx264 -pix_fmt yuv420p timelapse.mp4
+
+	- Use sorted filenames or pattern `img%04d.jpg`.
+
+
+43. cool-retro-term/convert variants — change colorspace & alpha
+	convert input.png -colorspace Gray -alpha remove -background white output.png
+
+	- `-colorspace` e.g., `Gray`, `sRGB`.
+
+
+44. tiff manipulation with ImageMagick / libtiff
+	convert input.tif -compress jpeg -quality 85 output.tif
+
+	- Set compression for multi-page TIFFs.
+
+
+45. pdftohtml / pdf2htmlEX — PDF → HTML
+	pdftohtml -c -noframes input.pdf output.html
+	pdf2htmlEX --zoom 1.3 input.pdf output.html
+
+	- `-c` preserve complex layout.
+
+
+46. OCR to searchable PDF (tesseract)
+	tesseract input_page.png output_pdf pdf
+
+	- Produces `output_pdf.pdf` searchable PDF.
+
+
+47. wkhtmltopdf + header/footer — HTML → PDF with extras
+	wkhtmltopdf --header-center "Title" --footer-right "[page]" input.html output.pdf
+
+	- Useful for adding page numbers.
+
+
+48. imagemagick — convert HEIC/HEIF images (if supported)
+	convert input.heic -quality 90 output.jpg
+
+	- May require `libheif` and ImageMagick built with HEIF support.
+
+
+49. avconv (libav) — similar to ffmpeg (if installed)
+	avconv -i input.avi -c:v libx264 output.mp4
+
+	- Use ffmpeg where possible; avconv is older alternative.
+
+
+50. exiftool — batch rename images by date/time from EXIF
+	exiftool '-FileName<${DateTimeOriginal}_%f.%e' -d %Y%m%d_%H%M%S -r .
+
+	- `-d` date format; `-r` recursive.
+
+
+51. mediainfo — display container and codec info (nice human output)
+	mediainfo input.mkv
+
+	- Useful to inspect before converting.
+
+
+52. qrtools / zbarimg — image → decode QR/barcode
+	zbarimg --raw qrcode.png
+
+	- Returns the encoded text.
+
+
+53. xml/JSON conversions — jq / xml2json / yq
+	jq '.' input.json > pretty.json
+	yq -o=json eval input.yaml > output.json
+
+	- `jq` for JSON queries and formatting.
+
+
+54. convert audio container without re-encoding
+	ffmpeg -i input.m4a -c copy output.mp3   # Only works if codecs compatible
+
+	- Generally `-c copy` only works for compatible container/codec combos.
+
+
+55. quick checks & safety tips
+	- Use `-n`/`--dry-run` where supported or test on a copy before batch runs.
+	- Always keep backups when running destructive `mv`/`mogrify`/`exiftool -all=` commands.
+
+
+If you want a saved cheatsheet file or example scripts, ask and I will add them in the workspace (for example `conversion_cheatsheet.md` or `scripts/`).
+
