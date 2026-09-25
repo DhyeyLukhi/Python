@@ -1330,3 +1330,9 @@
        	
 65. getting papaers from GTU:
 	--> https://gtu.ac.in/uploads/{W/S year}/{degree}/{subject-code}.pdf
+
+
+66. Run VLC in http:
+	--> vlc --extraintf=http --http-host=0.0.0.0 --http-port=8080 --http-password='yourpassword'
+	--> open browser in other device, http://<IP of VLC device>:8080
+	--> leave username field empty, and fill password
